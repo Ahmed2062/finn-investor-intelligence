@@ -80,7 +80,7 @@ module.exports = async (req, res) => {
         const description = field(item, "description");
         const link = field(item, "link");
         const pubDate = field(item, "pubDate");
-        const symbol = findIssuer(`${title} ${description}`);
+        const symbol = findIssuer(title);
         return {
           title,
           description: description.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim().slice(0, 350),

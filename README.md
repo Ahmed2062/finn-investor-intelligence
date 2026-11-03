@@ -25,9 +25,4 @@ The UI is static HTML/CSS/JS; `api/prices.js` and `api/announcements.js` provide
 
 18 NSE-listed names across financials, technology, energy, consumer, auto, pharma, telecom, infrastructure and utilities: RELIANCE, HDFCBANK, TCS, BHARTIARTL, TATAMOTORS, SUNPHARMA, INFY, ITC, ICICIBANK, LT, MARUTI, TITAN, AXISBANK, ASIANPAINT, NTPC, POWERGRID, BAJFINANCE, HINDUNILVR. Ad-hoc coverage includes ZOMATO/Eternal and ADANIPORTS in the research picker.
 
-## Submission
-
 Live demo: https://finn-investor-intelligence.vercel.app/  
-Source repository: https://github.com/Ahmed2062/finn-investor-intelligence
-
-Email these links and the covering write-up to ENAM with the original AI conversation share link/export if requested. Keep the covering note and private contact details out of the public source repository. See `DEPLOY.md` for the checklist.

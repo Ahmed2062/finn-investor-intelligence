@@ -1,55 +1,33 @@
-# GitHub and live deployment
+# FINN deployment and submission notes
 
-## Upload these project files to GitHub
+## Live project
 
-Upload the contents of the `FINN-submission` folder (not just the ZIP):
+- Demo: https://finn-investor-intelligence.vercel.app/
+- Source: https://github.com/Ahmed2062/finn-investor-intelligence
+- Hosting: Vercel, connected to the GitHub `main` branch. New commits to `main` trigger a deployment.
 
-- `index.html`
-- `api/prices.js`
-- `api/announcements.js`
-- `vercel.json`
-- `.gitignore`
-- `README.md`
-- `DEPLOY.md`
-- `DATA-SOURCES.md`
-- `DATA-SOURCES.md`
-- `AI-build-history.md`
-- `covering-note.txt` (optional; keep private or omit if you do not want your draft email public)
+The app is a responsive static HTML/CSS/JavaScript page with two Vercel Node.js API routes: `api/prices.js` and `api/announcements.js`. The Vercel project uses the **Other** framework preset, repository root as the project root, and no build command or dependency installation step. `vercel.json` sets a 15-second maximum function duration.
 
-Do not publish private personal contact details, account credentials, API keys, or the original AI transcript publicly. Add the transcript/share link separately in the submission email if required.
+To check the live data path, open the demo and click **Refresh live data**. A successful refresh changes the status to `LIVE · NSE + YAHOO` and reports the filings and prices loaded. If an upstream source is unavailable, the app keeps the sample feed visible and reports a sample or partial status.
 
-## Create the GitHub repository
+## What is in the GitHub repository
 
-1. Sign in to GitHub and create a new repository named `finn-investor-intelligence` (or another name you prefer).
-2. Set it **Public** if ENAM needs to review the code without access approval. Do not include personal data in the public repo.
-3. Use **Add file → Upload files** and upload the listed project files, retaining the `api` subfolder. Or use Git locally:
+- `index.html` — mobile-first app and research interface.
+- `api/prices.js` — EOD price and volume endpoint for the 18-stock demo portfolio.
+- `api/announcements.js` — NSE announcement feed endpoint with issuer matching.
+- `vercel.json` and `.gitignore` — deployment configuration and ignored files.
+- `README.md`, `DATA-SOURCES.md`, and `AI-build-history.md` — reviewer-facing project, provenance, and process notes.
 
-   ```bash
-   cd FINN-submission
-   git init
-   git add index.html api vercel.json .gitignore README.md DEPLOY.md DATA-SOURCES.md AI-build-history.md
-   git commit -m "Build FINN investor intelligence prototype"
-   git branch -M main
-   git remote add origin https://github.com/YOUR-USERNAME/finn-investor-intelligence.git
-   git push -u origin main
-   ```
+`covering-note.txt` is kept in the submission package for use as the email write-up; it is intentionally not in the public source repository. It includes an AI conversation share link. Check that the link is accessible to the assessment team before sending.
 
-4. Copy the repository URL from the browser, for example `https://github.com/YOUR-USERNAME/finn-investor-intelligence`.
+## Data and prototype limits
 
-## Deploy the working prototype on Vercel
+- Yahoo Finance chart data is unofficial and end-of-day; the endpoint can change or rate-limit.
+- NSE announcements come from its public all-announcements RSS feed. FINN matches portfolio companies by issuer title, so feed items with unclear issuer titles can be missed. Open the linked filing before relying on an item.
+- The research view links to Screener company pages but does not download or analyze annual reports or earnings-call transcripts. Research metrics and narrative remain illustrative.
+- Alert thresholds are configurable in the browser, but the app does not send scheduled or push notifications.
+- The sample feed, portfolio totals, and research content are illustrative, not current information or investment advice.
 
-Use Vercel rather than GitHub Pages for this version: the `/api` routes need a serverless runtime, which static-only GitHub Pages does not provide.
+## Email submission
 
-1. Sign in to Vercel and choose **Add New → Project**.
-2. Import the GitHub repository you just created and authorize access if prompted.
-3. Keep the project root at the repository root. Framework preset: **Other**. No build command is needed; there is no dependency installation step.
-4. Deploy. Vercel serves `index.html` and the two Node API routes. Open the resulting `*.vercel.app` URL on desktop and phone.
-5. In FINN, click **Refresh live data**. The status should change from sample mode to live; if a source is unavailable, it reports that and leaves the sample feed visible.
-6. Send both the live `*.vercel.app` URL and the GitHub repository URL in your email. After future changes, push to `main`; Vercel automatically builds a new deployment.
-
-## Data and coverage limits to disclose
-
-- Yahoo Finance chart bars are accessed through an unofficial endpoint and are end-of-day; the endpoint can change or rate-limit. Price data is for demo use.
-- NSE's official RSS page lists announcement feeds; the app consumes the public all-announcements RSS XML and matches portfolio company names in the item text. Name matching can miss items and the feed is not a complete normalized filing database. Open the original exchange filing before relying on an item.
-- The research view links to Screener company pages, but this prototype does not download or analyze annual reports or earnings-call transcripts. Its displayed research metrics and narrative are illustrative. Do not describe pull-side research as live or verified until document ingestion and source citations are implemented.
-- Vercel deployments do not create a scheduled alert service. Current thresholds are saved in the browser and are configuration UI only; live alerts would need a scheduled backend and delivery channel.
+Send the covering write-up and required links to `assessment@enam.com` with the subject `ENAM - IIT screening - 2027`. Include the live demo URL, the public GitHub repository URL, and the original AI build conversation share link or export as required by the challenge brief.
